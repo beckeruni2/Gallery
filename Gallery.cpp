@@ -2,6 +2,8 @@
 #include <string>
 #include "MemoryAccess.h"
 #include "AlbumManager.h"
+#include <ctime.h>
+
 
 
 int getCommandNumberFromUser()
@@ -13,8 +15,9 @@ int getCommandNumberFromUser()
 	std::string input;
 	std::getline(std::cin, input);
 	
-	while (std::cin.fail() || std::cin.eof() || input.find_first_not_of(numericStr) != std::string::npos) {
 
+	while (std::cin.fail() || std::cin.eof() || input.find_first_not_of(numericStr) != std::string::npos) {
+		
 		std::cout << "Please enter a number only!" << std::endl;
 
 		if (input.find_first_not_of(numericStr) == std::string::npos) {
@@ -35,8 +38,12 @@ int main(void)
 
 	// initialize album manager
 	AlbumManager albumManager(dataAccess);
+	std::time_t rawtime;
+	std::tm* timeinfo;
 
-
+	std::time(&rawtime);
+	timeinfo = std::localtime(&rawtime);
+	std::cout << "Esti, Amit and Aviad" << std::asctime(timeinfo) << std::endl;
 	std::string albumName;
 	std::cout << "Welcome to Gallery!" << std::endl;
 	std::cout << "===================" << std::endl;
